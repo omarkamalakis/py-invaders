@@ -19,8 +19,8 @@ These instructions are on the main menu:
 
 * Clone the repository `git clone https://github.com/omarkamalakis/py-invaders.git`
 * Install dependencies `pygame`, `random`, and `os`:
-	* Pip `pip install pygame random os`
-	* using your own package manager
+	* Using pip `pip install pygame random os`
+	* Using your own package manager
 * Run `python galacticmoon.py`
 
 
@@ -28,5 +28,5 @@ These instructions are on the main menu:
 
 * Abraham White
 * Gabe Kamalakis
-* Vincent Lin
+* Victor Lin
 * Leon Miro
