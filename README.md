@@ -4,7 +4,7 @@
 
 ### Introduction:
 
-`py-invader` is a Galaga-inspired 2D arcade game written in Python using the pygame libraries. You play as the pilot of your own space ship during an invasion of the evil moons in interplanetary space. Your goal is to eliminate as many as you can.
+`py-invader` is a Galaga-inspired 2D arcade game written in Python using the pygame libraries for our INST-326 final project. You play as the pilot of your own space ship during an invasion of the evil moons in interplanetary space. Your goal is to eliminate as many as you can.
 
 #### Rules:
 
