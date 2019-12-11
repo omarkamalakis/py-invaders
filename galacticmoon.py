@@ -58,37 +58,37 @@ def show_gameover_screen():
 class Player(pygame.sprite.Sprite): #set up player
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(img_folder, "spaceship.png")).convert() ## 50 by 50
+        self.image = pygame.image.load(os.path.join(img_folder, "spaceship.png")).convert() #load image 
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = 22
+        self.radius = 22 #set player radius (for bumping into the enemy)
         #pygame.draw.circle(self.image, (0,0,0), self.rect.center, self.radius)
         self.rect.centerx = WIDTH/2 #X position
         self.rect.bottom = HEIGHT - 10
-        self.speedx = 0 #set side to side speed
-        self.speedy = 0
+        self.speedx = 0 #set resting side to side speed to 0
+        self.speedy = 0 #set resting up and down speed to 0
 
     def update(self):
         self.speedx = 0
         self.speedy = 0
-        keystate = pygame.key.get_pressed()
-        if keystate[pygame.K_a]:
-            self.speedx = -20
-        if keystate[pygame.K_d]:
-            self.speedx = 20
+        keystate = pygame.key.get_pressed() 
+        if keystate[pygame.K_a]: #if the "a" key is pressed move player to the left
+            self.speedx = -20 #20 movement
+        if keystate[pygame.K_d]: #if the "d" key is pressed move player to the right
+            self.speedx = 20 #20 movement
         self.rect.x += self.speedx #moves player by x speed
-        if keystate[pygame.K_w]:
+        if keystate[pygame.K_w]: #move player up by 20 if the "w" key is pressed
             self.speedy = -20
-        if keystate[pygame.K_s]:
+        if keystate[pygame.K_s]: #move player down by 20 if the "s" key is pressed
             self.speedy = 20
         self.rect.y += self.speedy #moves player by y speed
-        if self.rect.right > WIDTH:
+        if self.rect.right > WIDTH: #makes player able to loop across the screen from right to left
             self.rect.left = 0
-        if self.rect.left < 0:
+        if self.rect.left < 0: #makes player able to loop across the screen from left to right
             self.rect.right = WIDTH
-        if self.rect.bottom > HEIGHT:
+        if self.rect.bottom > HEIGHT: #sets lower map boundary for player
             self.rect.bottom = HEIGHT
-        if self.rect.top < 0:
+        if self.rect.top < 0: #makes player able to loop across the screen from top to bottom
             self.rect.top = HEIGHT
     
     def shootup(self): #define the shooting funtion
@@ -100,10 +100,10 @@ class Player(pygame.sprite.Sprite): #set up player
 class Mob(pygame.sprite.Sprite): #set up enemy
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(img_folder, "moon.png")).convert() ## 54 by 54
+        self.image = pygame.image.load(os.path.join(img_folder, "moon.png")).convert() ## load the mob image
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = 24
+        self.radius = 24 #set image radius (for bullet and player collision)
         #pygame.draw.circle(self.image, (0,0,255), self.rect.center, self.radius)
         self.rect.x = random.randrange(0, WIDTH - self.rect.width) #enemy spawn random on x axis
         self.rect.y = random.randrange(-400, -50)
@@ -116,12 +116,12 @@ class Mob(pygame.sprite.Sprite): #set up enemy
         if self.rect.top > HEIGHT + 10:
             self.rect.x = random.randrange(0, WIDTH - self.rect.width) #enemy spawn random on x axis
             self.rect.y = random.randrange(-400, -50)
-            self.speedy = self.speedy + random.randrange(-1,2)
-            self.speedx = random.randrange(-12, 12)
-        if self.rect.left <0:
-            self.speedx = random.randrange(4, 14)
-        if self.rect.right > WIDTH:
-            self.speedx = random.randrange(-14, -4)
+            self.speedy = self.speedy + random.randrange(-1,2) 
+            self.speedx = random.randrange(-12, 12) #randomize the enemy side to side speed
+        if self.rect.left <0: #if the enemy hits the left side of the screen
+            self.speedx = random.randrange(4, 14) #randiomize the speed they bounce off
+        if self.rect.right > WIDTH: #if the enemy hits the right side of the screen
+            self.speedx = random.randrange(-14, -4) #randomize the speed they bounce off
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -129,12 +129,12 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((10, 20)) #set bullet image
         self.image.fill((255,0,0))  #sets the color of the bullet image
         self.rect = self.image.get_rect() #gives the image a rectangle
-        self.radius = 10
+        self.radius = 10 #set collisions radius
         #pygame.draw.circle(self.image, (0,0,255), self.rect.center, self.radius)
         self.rect.bottom = y #sets the y cordinate of the bullet
         self.rect.centerx = x #sets the x cordinate of the bullet 
         self.speedy = -30 #set the bullets y speed
-        self.speedx = 0 
+        self.speedx = 0  #set side to side speed
     
 
     def update(self): 
@@ -193,16 +193,17 @@ while running:
                 backgroundx_change = 0 #the background stops moving left or right
             if event.key == pygame.K_s or pygame.K_w: #if the user releases the s or w key
                 backgroundy_change = 0 #the background stops moving or or down
-    #set background movement
-            
-    keystates = pygame.key.get_pressed()
-    if keystates[pygame.K_a]:
+    
+    
+    #set BACKGROUND MOVEMENT       
+    keystates = pygame.key.get_pressed() #move the background while the player moves
+    if keystates[pygame.K_a]: #move background along the x if the "a key is pressed
         backgroundx_change = 30  
-    if keystates[pygame.K_d]:
+    if keystates[pygame.K_d]: #move background along the x axis if the "d" key is pressed
         backgroundx_change = -30
-    if keystates[pygame.K_w]:
+    if keystates[pygame.K_w]: #move background along the y axis if the "w" key is pressed
         backgroundy_change = 30
-    if keystates[pygame.K_s]:
+    if keystates[pygame.K_s]: #move background along the y axis if the "s" key is pressed
         backgroundy_change = -30
     backgroundx += backgroundx_change
     backgroundy += backgroundy_change
@@ -225,7 +226,7 @@ while running:
     hits = pygame.sprite.groupcollide(mobs, bullets, True, True) #delete bullet and mob if they collide
     for hit in hits: #make new mobs when old ones are shot
         m = Mob()
-        all_sprites.add(m) #add the mob to tha sll srpites list
+        all_sprites.add(m) #add the mob to the all sripites list
         mobs.add(m) #add mob to the mob list
         score += 100
     #check to see if a mob hit the player
@@ -235,14 +236,13 @@ while running:
         game_over = True
     
     #Draw/render
-    #screen.fill((0,0,0)) #set the screen .... not needed?
     background(backgroundx, backgroundy) #call the funtion that draws the background 
     all_sprites.draw(screen) #draw all the spites onto the screen
     draw_text(screen, "Score: "+str(score), 50, WIDTH/2, 10) #call the drawtext funtion, screen if the surface, string of the score is the text
     #do after drawing everything
     pygame.display.flip() #update the screen to show the drawings
     
-pygame.quit()
+pygame.quit() #exit pygame
 
 
 
