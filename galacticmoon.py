@@ -58,7 +58,7 @@ def show_gameover_screen():
 class Player(pygame.sprite.Sprite): #set up player
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(img_folder, "spaceship_2.png")).convert() ## 50 by 50
+        self.image = pygame.image.load(os.path.join(img_folder, "spaceship.png")).convert() ## 50 by 50
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
         self.radius = 22
